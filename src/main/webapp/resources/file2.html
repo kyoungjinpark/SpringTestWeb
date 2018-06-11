@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>파일 올리기</title>
+<!-- <script type="text/javascript" src="/test/webjars/jquery/3.3.1/dist/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("form").submit(function(event){
+			event.preventDefault();
+			
+		 $.ajax({ 
+				type: "post",
+				url: "http://myServer/resources/jin", 
+				data: new FormData($(this)[0]),
+			 	processData: false,
+			 	contentType:false,
+			 	cache:false
+		 	 }).done(function(data){
+					var json = JSON.parse(data);
+					var list = json.upload;
+					console.log(list);
+					for(var i=0;i<list.length;i++){
+						console.log(list[i].fileUrl);
+						var html = "<img src='http://myServer/" + list[i].fileUrl + "'width=180px'>";
+						$("#view").append(html);
+					}
+			}); 
+			
+		});
+	});
+</script> -->
+</head>
+<body>
+	<form action="http://myserver/FileUpload/temp/" enctype="multipart/form-data">
+		<input type="file"  id="file" multiple="multiple"><br>
+		<input type="submit" value="파일업로드">
+	</form>
+	<div id="view"></div>
+</body>
+</html>

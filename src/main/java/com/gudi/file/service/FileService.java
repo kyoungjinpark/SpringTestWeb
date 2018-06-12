@@ -59,7 +59,7 @@ public class FileService implements FileServiceInterface {
 				fileMap.put("userNo", param.get("userNo"));
 								
 				/*********************************************************************************************/
-				//fdi.insert(fileMap);
+				fdi.insert(fileMap);
 				/*********************************************************************************************/
 				
 				list.add(fileMap);				

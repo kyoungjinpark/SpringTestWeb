@@ -9,16 +9,25 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gudi.file.dao.FileDaoInterface;
+import com.gudi.util.HttpUtil;
+
 @Service
 public class FileService implements FileServiceInterface {
+	
+	@Autowired
+	FileDaoInterface fdi;
 
 	@Override
 	public HashMap<String, Object> fileUpload(MultipartFile[] files, String dir, HttpServletRequest req) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		
+		HashMap<String, Object> param = HttpUtil.getParamMap(req);
 		
 		for(int i = 0; i < files.length; i++) {
 			HashMap<String, Object> fileMap = new HashMap<String, Object>();
@@ -29,7 +38,7 @@ public class FileService implements FileServiceInterface {
 //				String path = "D:/GDJ10/IDE/workspace/FileServer/src/main/webapp/resources/" + dir + "/";
 				String path = "/var/www/html/resources/" + dir + "/";
 //				String path = req.getSession().getServletContext().getRealPath("/") + "resources/" + dir + "/";
-				String dns = "http://myServer/";
+				String dns = "http://gudi.iptime.org:10040/";
 				
 				File dirF = new File(path);
 				
@@ -44,7 +53,15 @@ public class FileService implements FileServiceInterface {
 				
 				fileMap.put("fileName", fileNm);
 				fileMap.put("filePath", path);
-				fileMap.put("fileUrl", dns + "resources/" + dir + "/" + fileNm);
+				fileMap.put("fileURL", dns + "resources/" + dir + "/" + fileNm);
+				
+				fileMap.put("boardNo", param.get("boardNo"));
+				fileMap.put("userNo", param.get("userNo"));
+								
+				/*********************************************************************************************/
+				//fdi.insert(fileMap);
+				/*********************************************************************************************/
+				
 				list.add(fileMap);				
 				
 			} catch (Exception e) {
